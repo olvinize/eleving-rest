@@ -1,0 +1,48 @@
+version: '3'
+services:
+  #PHP Service
+  eleving:
+    build:
+      context: ./docker
+    image: eleving-rest/app
+    environment:
+      TZ: ${TZ}
+      ENV: ${ENV}
+    depends_on:
+      - postgres
+    volumes:
+      - ./:/var/www/html
+    networks:
+      - eleving-network
+
+  #Nginx Service
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "${PROXY_PORT}:80"
+    environment:
+      TZ: ${TZ}
+    volumes:
+      - ./public:/var/www/html
+      - ./docker/nginx/conf.d/:/etc/nginx/conf.d/
+    networks:
+      - eleving-network
+
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_PASSWORD: example
+    #volumes:
+    #  - ../data:/var/lib/postgresql/data
+    networks:
+      - eleving-network
+  postgres-adminer:
+    image: adminer
+    ports:
+      - "8081:8080"
+    networks:
+      - eleving-network
+
+#Docker Networks
+networks:
+  eleving-network:
