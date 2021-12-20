@@ -1,9 +1,9 @@
 # eleving-rest
-REST delivery service
+REST delivery service with Rate Limit 10 requests per minute.
 
 ## Stack
 PHP 8, Symfony 6, Postgres
-Symfony components: Doctrine, Annotations, Validation, Forms, Twig
+Symfony components: Doctrine, Annotations, Validation, Forms, Twig, RateLimit
 
 ## Setup
 
@@ -14,9 +14,10 @@ $ git clone https://github.com/olvinize/eleving-rest.git
 
 Update **.env** file if necessary (see Docker configuration) and start docker containers
 ```
-$ docker-compose -f eleving-rest/docker/docker-compose.yml up -d
+$ docker-compose -f eleving-rest/docker-compose.yml up -d
 ```
-To test service, open in browser
+
+To test service, open in browser (**First container launch installs composer dependencies and can take 30 to 60 seconds**)
 
 ```
 http://localhost:81
