@@ -66,6 +66,8 @@
         </tr>
         </thead>
     </table>
+
+    <pre id="orderInfo"></pre>
     <hr>
     <h1>Courier interface</h1>
     <hr>
@@ -83,11 +85,16 @@
         </tr>
         </thead>
     </table>
+    <hr class="mt-5">
     <script>
         $(document).ready(function () {
             const customer = new Customer("{{ path('api.shipping.calc') }}", "{{ path('api.order.place') }}", "{{ path('api.products.list') }}");
             customer.init();
-            const seller = new Seller("{{ path('api.orders.list') }}", "{{ path('api.order.setCourier', {id: 1, courierId: 2})|replace({'1': '{1}', '2': '{2}'}) }}", "{{ path('api.couriers.list') }}");
+            const seller = new Seller(
+                "{{ path('api.orders.list') }}",
+                "{{ path('api.order.setCourier', {id: 1, courierId: 2})|replace({'1': '{1}', '2': '{2}'}) }}",
+                "{{ path('api.couriers.list') }}",
+                "{{ path('api.order.view', {id: 1})|replace({'1': '{1}'}) }}");
             seller.init();
             const courier = new Courier("{{ path('api.orders.list') }}", "{{ path('api.order.delivered', {id: 1}) }}");
             courier.init();
@@ -100,4 +107,12 @@
     <script src="assets/customer.js"></script>
     <script src="assets/seller.js"></script>
     <script src="assets/courier.js"></script>
+    <style>
+        pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
+        .string { color: green; }
+        .number { color: darkorange; }
+        .boolean { color: blue; }
+        .null { color: magenta; }
+        .key { color: red; }
+    </style>
 {% endblock %}

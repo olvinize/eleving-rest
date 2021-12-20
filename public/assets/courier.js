@@ -60,7 +60,7 @@ class Courier {
             "order": [[0, "desc"]]
         }).on('draw', () => {
             const courier = this;
-            $('#courierOrders').find('[action-set-delivered]').click(
+            $('#courierOrders').find('[action-set-delivered]').on('click',
                 function () {
                     const orderId = $(this).attr('action-set-delivered');
                     courier.setDelivered(orderId).then(response => {

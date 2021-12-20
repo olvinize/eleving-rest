@@ -65,15 +65,15 @@ class Customer {
                 {
                     "data": "id",
                     "mRender": function (value, action, row) {
-                        return '<button data-product="' + row.id + '" class="btn btn-sm btn-success">Add to Cart</button>';
+                        return '<button action-product="' + row.id + '" class="btn btn-sm btn-success">Add to Cart</button>';
                     }
                 }
             ]
         }).on('draw', () => {
             const customer = this;
-            $('#products').find('[data-product]').click(
+            $('#products').find('[action-product]').on('click',
                 function () {
-                    const product = customer.products[$(this).attr('data-product')];
+                    const product = customer.products[$(this).attr('action-product')];
                     if (!customer.cart[product.id]) {
                         $('#cart').dataTable().fnAddData([product.name, product.seller, product.address, product.price]);
                         customer.cart[product.id] = product;
