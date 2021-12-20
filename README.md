@@ -49,14 +49,15 @@ message: string - optional response text message
 ```
 
 Api calls:
-* POST /api/shipping/calc - receives delivery address and products ids
+* POST /api/shipping/calc - calculates shipping costs
+Input parameters
 ```
 {
 deliveryAddress: Riga, Brivibas street
 products: [1, 4, 6]
 }
 ```
-Response is calculated prices
+Response contains calculated prices
 ```
 {
   value: {
@@ -67,6 +68,7 @@ Response is calculated prices
 }
 ```
 * POST /api/order/create - places order to the system
+Input parameters
 ```
 {
 deliveryAddress: Riga, Brivibas street
@@ -97,13 +99,17 @@ Response
 ```
 * POST /api/order/{id}/setCourier/{courierId} - assigns courier to order and initiates delivery
 
+Input: no parameters
+
 Response
 ```
 {
   success: true
 }
 ```
-* POST /api/order/{id}/delivered - completes order delivery
+* POST /api/order/{id}/delivered - completes order delivery 
+
+Input: no parameters
 
 Response
 ```
