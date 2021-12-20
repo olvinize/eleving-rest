@@ -4,8 +4,6 @@ namespace App\Utils;
 
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Validator\ConstraintViolationInterface;
-use Symfony\Component\Validator\ConstraintViolationListInterface;
 
 class Helper
 {
@@ -20,17 +18,6 @@ class Helper
             $data['message'] = $message;
         }
         return new JsonResponse($data); //, $code);
-    }
-
-    public function formatErrors(ConstraintViolationListInterface $list): array
-    {
-        $errors = [];
-
-        foreach ($list as $item) {
-            /** @var $item ConstraintViolationInterface */
-            $errors[$item->getPropertyPath()] = $item->getMessage();
-        }
-        return $errors;
     }
 
     public function getFormErrors(FormInterface $form): array
